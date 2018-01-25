@@ -1,8 +1,22 @@
-<ul class="list-group">
-  <li class="list-group-item">
-    <strong>Tarea 1: </strong> 
-    <div class="text-secondary">
-      descripcion
-    </div>
-  </li>
-</ul>
+<div class="container" *ngIf="tasks?.length > 0 else noTasks">
+  <ul class="list-group" *ngFor="let task of tasks">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-11">
+          <strong>{{task.title}}</strong>
+          <div class="text-secondary">
+            {{task.description}}
+          </div>
+        </div>
+        <div class="col-1">
+          <a href="#">
+            <i class="fa fa-trash"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-pencil"></i>
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
