@@ -1,4 +1,5 @@
-<form (ngSubmit)="onSubmit">
+<div class="container">
+<form (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="task">Tarea</label>
     <input type="input" class="form-control" id="task" aria-describedby="Tarea" placeholder="Ingresa la tarea" name="title" [(ngModel)]="task.title"> 
@@ -10,3 +11,4 @@
   
   <button type="submit" class="btn btn-primary">Guardar </button>
 </form>
+</div>

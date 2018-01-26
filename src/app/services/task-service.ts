@@ -7,14 +7,16 @@ import {
 } from 'angularfire2/firestore';
 import { Task } from '../models/task';
 import { Observable } from 'rxjs/Observable';
-  
+
+
+
 
 @Injectable()
 
 export class TaskService {
   tasksCollection: AngularFirestoreCollection<Task>;
   tasks: Observable<Task[]>;
-  taskDocs: AngularFirestoreDocument<Task>;
+  taskDoc: AngularFirestoreDocument<Task>;
 
   constructor(public afs: AngularFirestore) {
     this.tasksCollection = this.afs.collection('tasks');
@@ -27,11 +29,20 @@ export class TaskService {
     });
   }
 
-  getTasks(){
+  getTasks() {
     return this.tasks;
   }
 
   addTask(task: Task) {
     this.tasksCollection.add(task);
+  }
+  deleteTask(task: Task): any {
+    this.taskDoc = this.afs.doc(`tasks/${task.id}`);
+    this.taskDoc.delete();
+  }
+
+  updateTask(task: Task) {
+    this.taskDoc = this.afs.doc(`tasks/${task.id}`);
+    this.taskDoc.update(task);
   }
 }

@@ -1,22 +1,41 @@
 <div class="container" *ngIf="tasks?.length > 0 else noTasks">
-  <ul class="list-group" *ngFor="let task of tasks">
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col-11">
-          <strong>{{task.title}}</strong>
-          <div class="text-secondary">
-            {{task.description}}
+  <div class="col-12">
+    <ul class="list-group" *ngFor="let task of tasks">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-11">
+            <strong>{{task.title}}</strong>
+            <div class="text-secondary">
+              {{task.description}}
+            </div>
+          </div>
+          <div class="col-1">
+            <a href="#" (click)="deleteTask($event, task)">
+              <i class="fa fa-trash"></i>
+            </a>
+            <a href="#" (click)="editTask($event, task)">
+              <i class="fa fa-pencil"></i>
+            </a>
+          </div>
+          <div class="row">
+            <div class="col-10" *ngIf="editState && taskToEdit.id === task.id">
+              <form (ngSubmit)="updateTask($event, task)">
+                <div class="form-group">
+                  <label for="task">Tarea</label>
+                  
+                  <input type="input" class="form-control" id="task" aria-describedby="Tarea" placeholder="Edita la tarea" name="title" [(ngModel)]="task.title">
+                </div>
+                <div class="form-group">
+                  <label for="task">Descripcion</label>
+                  <input type="input" class="form-control" id="task" aria-describedby="Descrición" placeholder="Edita la descripción" name="description"
+                    [(ngModel)]="task.description">
+                </div>
+                <button type="submit" class="btn btn-primary">Actualizar </button>
+              </form>
+            </div>
           </div>
         </div>
-        <div class="col-1">
-          <a href="#">
-            <i class="fa fa-trash"></i>
-          </a>
-          <a href="#">
-            <i class="fa fa-pencil"></i>
-          </a>
-        </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
 </div>
